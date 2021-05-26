@@ -48,19 +48,17 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const product = products.find((product: Product) => product.id === productId)
 
-      if (product) {
-        if (cart.find((product: Product) => product.id === productId)) {
-          setCart(cart.map((product: Product) => {
-            return product.id === productId
-              ? { ...product, amount: product.amount + 1 }
-              : product
-          }))
-        } else {
-          setCart([...cart, product])
-        }
-
-        toast.info(`${product.title} adicionado ao carrinho`)
+      if (cart.find((p: Product) => p.id === productId)) {
+        setCart(cart.map((product: Product) => {
+          return product.id === productId
+          ? { ...product, amount: product.amount + 1 }
+          : product
+        }))
+      } else {
+        setCart([...cart, { ...product, amount: 1 }])
       }
+
+      toast.info(`${product.title} adicionado ao carrinho`)
     } catch {
       toast.error('Erro na adição do produto')
     }
