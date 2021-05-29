@@ -48,8 +48,8 @@ const Home = (): JSX.Element => {
     loadProducts();
   }, []);
 
-  function handleAddProduct(id: number) {
-    addProduct(id)
+  async function handleAddProduct(id: number) {
+    await addProduct(id)
   }
 
   return (
